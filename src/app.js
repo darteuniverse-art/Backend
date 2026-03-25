@@ -32,7 +32,7 @@ app.use(
     saveUninitialized: false,
     // MongoStore for session persistence in db
     store: MongoStore.default.create({
-      mongoUrl: process.env.MONGO_URL,
+      mongoUrl: process.env.MONGO_URI,
       collectionName: 'sessions'
     }),
     cookie: { 

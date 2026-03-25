@@ -5,8 +5,8 @@ const requireAuth = async (req, res, next) => {
   next();
 };
 
-const requireRole = async (roles) => {
-  return (req, res, next) => {
+const requireRole = (roles) => {
+  return async (req, res, next) => {
     // Placeholder for role-based access control logic
     // Should check if the active user's role matches the allowed roles argument
     // Seller check should watch out for suspensions via the isSuspended flag on the seller model

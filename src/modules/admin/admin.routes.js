@@ -16,10 +16,10 @@ router.get("/orders", adminController.getAllOrders);
 router.get("/orders/:id", adminController.getOrderById);
 
 // Discount Code Endpoints (optional, can be managed by admin)
-router.get("/discount-codes", authMiddleware.requireAdmin, ordersController.getDiscountCodes); 
-router.post("/discount-codes", authMiddleware.requireAdmin, ordersController.createDiscountCode); 
-router.put("/discount-codes/:code", authMiddleware.requireAdmin, ordersController.updateDiscountCode); 
-router.delete("/discount-codes/:code", authMiddleware.requireAdmin, ordersController.deleteDiscountCode);
+router.get("/discount-codes", authMiddleware.requireAdmin, adminController.getDiscountCodes); 
+router.post("/discount-codes", authMiddleware.requireAdmin, adminController.createDiscountCode); 
+router.put("/discount-codes/:code", authMiddleware.requireAdmin, adminController.updateDiscountCode); 
+router.delete("/discount-codes/:code", authMiddleware.requireAdmin, adminController.deleteDiscountCode);
 
 module.exports = router;
 

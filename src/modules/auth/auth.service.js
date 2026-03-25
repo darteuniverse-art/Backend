@@ -7,6 +7,7 @@ async function forgotPassword() {}
 async function resetPassword() {}
 async function getUser() {}
 async function logout() {}
+async function uploadProfilePicture() {}
 
 module.exports = {
   register,
@@ -15,4 +16,5 @@ module.exports = {
   resetPassword,
   getUser,
   logout,
+  uploadProfilePicture
 };
