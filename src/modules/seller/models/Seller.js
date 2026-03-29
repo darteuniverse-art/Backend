@@ -5,17 +5,25 @@ contact info, and a reference to the user account that owns the store.
 This allows us to manage store-specific information separately from general user
 data while still linking them together through the user reference.
 */
-const mongoose = require('mongoose');
-const sellerSchema = new mongoose.Schema({
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+const mongoose = require("mongoose");
+const sellerSchema = new mongoose.Schema(
+  {
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
     storeName: { type: String, required: true },
     description: { type: String },
     contactEmail: { type: String },
     contactPhone: { type: String },
     address: { type: String },
-    isSuspended: { type: Boolean, default: false }
-}, { timestamps: true });
+    isSuspended: { type: Boolean, default: false },
+  },
+  { timestamps: true },
+);
 
-sellerSchema.index({ storeName: 'text', description: 'text' });
+sellerSchema.index({ storeName: "text", description: "text" });
+sellerSchema.index({ userId: 1 });
 
-module.exports = mongoose.model('Seller', sellerSchema);
+module.exports = mongoose.model("Seller", sellerSchema);
