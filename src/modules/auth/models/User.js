@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 
 const userSchema = new mongoose.Schema(
   {
-    username: { type: String, required: true, unique: true },
+    fullName: { type: String, required: true, trim: true },
     email: {
       type: String,
       unique: true,
@@ -14,18 +14,23 @@ const userSchema = new mongoose.Schema(
     passwordHash: { type: String, required: true },
     role: { type: String, enum: ["user", "seller", "admin"], default: "user" },
     profilePictureKey: { type: String },
-    favoriteProducts: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }],
+    favoriteProducts: [
+      { type: mongoose.Schema.Types.ObjectId, ref: "Product" },
+    ],
   },
   { timestamps: true },
 );
 
+userSchema.index({ fullName: 1 });
+userSchema.index({ role: 1 });
+
 userSchema.methods.setPassword = async function (password) {
-    const saltRounds = 10;
-    this.passwordHash = await bcrypt.hash(password, saltRounds);
+  const saltRounds = 10;
+  this.passwordHash = await bcrypt.hash(password, saltRounds);
 };
 
 userSchema.methods.validatePassword = async function (password) {
-    return await bcrypt.compare(password, this.passwordHash);
+  return await bcrypt.compare(password, this.passwordHash);
 };
 
 module.exports = mongoose.model("User", userSchema);

@@ -1,3 +1,4 @@
+require("dotenv").config({path: ".env.local"});
 const express = require("express");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
@@ -45,7 +46,6 @@ app.use(
   })
 );
 
-app.set("trust proxy", true);
 
 // Health check endpoints
 app.get("/health", (req, res) => {
